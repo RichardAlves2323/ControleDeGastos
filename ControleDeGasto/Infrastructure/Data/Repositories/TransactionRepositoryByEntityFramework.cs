@@ -1,5 +1,5 @@
 ﻿using ControleDeGasto.Domain.Entities;
-using ControleDeGasto.Domain.Interfaces;
+using ControleDeGasto.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

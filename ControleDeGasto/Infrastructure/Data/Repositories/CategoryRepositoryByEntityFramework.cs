@@ -1,5 +1,5 @@
 ﻿using ControleDeGasto.Domain.Entities;
-using ControleDeGasto.Domain.Interfaces;
+using ControleDeGasto.Domain.Interfaces.Repositories;
 
 namespace ControleDeGasto.Infrastructure.Data.Repositories
 {
@@ -27,6 +27,11 @@ namespace ControleDeGasto.Infrastructure.Data.Repositories
         public Category GetCategoryById(int id)
         { 
             return _context.Categories.Find(id);
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            return _context.Categories.FirstOrDefault(c => c.Name == categoryName);
         }
 
         public void UpdateCategory(Category category)
