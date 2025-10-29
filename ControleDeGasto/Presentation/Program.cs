@@ -16,7 +16,7 @@ namespace ControleDeGasto.Presentation
             db.Database.EnsureCreated();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Form_Home());
         }
     }
 }
