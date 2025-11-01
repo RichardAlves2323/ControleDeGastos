@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Gbox_Category = new GroupBox();
             Btn_CreateCategory = new Button();
             Cbox_Type = new ComboBox();
@@ -48,6 +48,7 @@
             Tb_Transaction = new DataGridView();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             Chart_Transactions = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            Lbl_FinalAmount = new Label();
             Gbox_Category.SuspendLayout();
             Gbox_Transaction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Tb_Transaction).BeginInit();
@@ -197,36 +198,46 @@
             Tb_Transaction.Name = "Tb_Transaction";
             Tb_Transaction.ReadOnly = true;
             Tb_Transaction.RowHeadersWidth = 51;
-            Tb_Transaction.Size = new Size(803, 262);
+            Tb_Transaction.Size = new Size(680, 262);
             Tb_Transaction.TabIndex = 2;
             // 
             // Chart_Transactions
             // 
-            chartArea2.Name = "ChartArea1";
-            Chart_Transactions.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            Chart_Transactions.Legends.Add(legend2);
-            Chart_Transactions.Location = new Point(959, 68);
+            chartArea1.Name = "ChartArea1";
+            Chart_Transactions.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            Chart_Transactions.Legends.Add(legend1);
+            Chart_Transactions.Location = new Point(968, 12);
             Chart_Transactions.Name = "Chart_Transactions";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            Chart_Transactions.Series.Add(series2);
-            Chart_Transactions.Size = new Size(435, 428);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            Chart_Transactions.Series.Add(series1);
+            Chart_Transactions.Size = new Size(435, 384);
             Chart_Transactions.TabIndex = 3;
             Chart_Transactions.Text = "chart1";
+            // 
+            // Lbl_FinalAmount
+            // 
+            Lbl_FinalAmount.AutoSize = true;
+            Lbl_FinalAmount.Font = new Font("Segoe UI", 15F);
+            Lbl_FinalAmount.Location = new Point(1029, 399);
+            Lbl_FinalAmount.Name = "Lbl_FinalAmount";
+            Lbl_FinalAmount.Size = new Size(0, 35);
+            Lbl_FinalAmount.TabIndex = 4;
             // 
             // Form_Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1431, 574);
+            Controls.Add(Lbl_FinalAmount);
             Controls.Add(Chart_Transactions);
             Controls.Add(Tb_Transaction);
             Controls.Add(Gbox_Transaction);
             Controls.Add(Gbox_Category);
             Name = "Form_Home";
-            Text = "Form1";
+            Text = "Controle de Gasto";
             Gbox_Category.ResumeLayout(false);
             Gbox_Category.PerformLayout();
             Gbox_Transaction.ResumeLayout(false);
@@ -234,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)Tb_Transaction).EndInit();
             ((System.ComponentModel.ISupportInitialize)Chart_Transactions).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -255,5 +267,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label Lbl_TransactionDate;
         private System.Windows.Forms.DataVisualization.Charting.Chart Chart_Transactions;
+        private Label Lbl_FinalAmount;
     }
 }

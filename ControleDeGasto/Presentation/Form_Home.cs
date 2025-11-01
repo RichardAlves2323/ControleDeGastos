@@ -3,6 +3,7 @@ using ControleDeGasto.Domain.Interfaces.Services;
 using ControleDeGasto.Infrastructure.Data;
 using System.Data;
 using System.Diagnostics;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ControleDeGasto
 {
@@ -27,6 +28,8 @@ namespace ControleDeGasto
             LoadCategories();
             ConfigTransactionTable();
             TransactionInTable();
+            TransactionGraph();
+            TotalTransactionType();
         }
 
         private void LoadCategoryType()
@@ -62,6 +65,7 @@ namespace ControleDeGasto
 
             _transactionTable.Columns.Add("Id", typeof(int));
             _transactionTable.Columns.Add("Categoria", typeof(string));
+            _transactionTable.Columns.Add("Tipo", typeof(string));
             _transactionTable.Columns.Add("Valor", typeof(decimal));
             _transactionTable.Columns.Add("Data", typeof(string));
 
@@ -84,10 +88,19 @@ namespace ControleDeGasto
 
             newLine["Id"] = transaction.Id;
             newLine["Categoria"] = transaction.Category.Name;
+            newLine["Tipo"] = GetCategoryTypeTranslate(transaction.Category.Type);
             newLine["Valor"] = transaction.Amount;
             newLine["Data"] = transaction.Date.ToString();
 
             _transactionTable.Rows.Add(newLine);
+        }
+
+        private string GetCategoryTypeTranslate(string categoryType)
+        {
+            if (categoryType == "Expense")
+                return "Despesa";
+            
+            return "Receita";
         }
         private void Btn_CreateCategory_Click(object sender, EventArgs e)
         {
@@ -112,9 +125,49 @@ namespace ControleDeGasto
             {
                 Transaction transactionWithCategory = _transactionService.GetTransactionByIdWithCategory(transactionSaved.Id);
                 AddTransactionInTable(transactionWithCategory);
+                TransactionGraph();
+                TotalTransactionType();
             }
             Txt_TransactionAmount.Clear();
 
+        }
+
+        private void TransactionGraph()
+        {
+            Chart_Transactions.Series.Clear();
+
+            Series series = new Series
+            {
+                Name = "Apresentadação dos Gastos",
+                IsValueShownAsLabel = true,
+                ChartType = SeriesChartType.Pie
+            };
+
+            var transactionGraphs = _transactionService.GetTransactionGraphs();
+
+            foreach (var transactionGraph in transactionGraphs)
+            {
+                series.Points.AddXY(transactionGraph.CategoryName, transactionGraph.TotalAmount);
+            }
+
+            Chart_Transactions.Series.Add(series);
+
+            series.Label = "#PERCENT{P2}";
+            series.LegendText = "#VALX";
+        }
+
+        private void TotalTransactionType()
+        {
+            var totalTransactionTypes = _transactionService.GetTotalTransactionType();
+            string message = "Total por Tipo de Transação:\n\n";
+
+            foreach (var total in totalTransactionTypes)
+            {
+                string typeTranslate = GetCategoryTypeTranslate(total.CategoryName);
+                message += $"{typeTranslate}: {total.TotalAmount:C}\n";
+            }
+
+            Lbl_FinalAmount.Text = message;
         }
     }
 

@@ -33,6 +33,11 @@ namespace ControleDeGasto.Domain.Services
             return _transactionRepository.GetAllTransactionsWithCategory();
         }
 
+        public IEnumerable<TransactionGraph> GetTotalTransactionType()
+        {
+            return _transactionRepository.GetTotalTransactionType();
+        }
+
         public Transaction GetTransactionById(int id)
         {
             return _transactionRepository.GetTransactionById(id);
@@ -41,6 +46,11 @@ namespace ControleDeGasto.Domain.Services
         public Transaction GetTransactionByIdWithCategory(int id)
         {
             return _transactionRepository.GetTransactionByIdWithCategory(id);
+        }
+
+        public IEnumerable<TransactionGraph> GetTransactionGraphs()
+        {
+            return _transactionRepository.GetTransactionGraphs();
         }
 
         public void UpdateTransaction(Transaction transaction)

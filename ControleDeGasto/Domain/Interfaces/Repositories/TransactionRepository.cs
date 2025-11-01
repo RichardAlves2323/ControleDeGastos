@@ -12,5 +12,8 @@ namespace ControleDeGasto.Domain.Interfaces.Repositories
         IEnumerable<Transaction> GetAllTransactionsWithCategory();
         void UpdateTransaction(Transaction transaction);
         void DeleteTransaction(int id);
+        IEnumerable<TransactionGraph> GetTransactionGraphs();
+
+        IEnumerable<TransactionGraph> GetTotalTransactionType();
     }
 }

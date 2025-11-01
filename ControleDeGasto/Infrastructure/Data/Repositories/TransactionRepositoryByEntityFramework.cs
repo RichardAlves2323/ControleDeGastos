@@ -35,6 +35,15 @@ namespace ControleDeGasto.Infrastructure.Data.Repositories
             return _context.Transactions.Include(t => t.Category).ToList();
         }
 
+        public IEnumerable<TransactionGraph> GetTotalTransactionType()
+        {
+            return _context.Transactions
+               .Include(t => t.Category)
+               .GroupBy(t => t.Category.Type)
+               .Select(g => new TransactionGraph(g.Key, g.Sum(t => t.Amount)))
+               .ToList();
+        }
+
         public Transaction GetTransactionById(int id)
         {
             return _context.Transactions.Find(id);
@@ -43,6 +52,15 @@ namespace ControleDeGasto.Infrastructure.Data.Repositories
         public Transaction GetTransactionByIdWithCategory(int id)
         {
             return _context.Transactions.Include(t => t.Category).FirstOrDefault(t => t.Id == id);
+        }
+
+        public IEnumerable<TransactionGraph> GetTransactionGraphs()
+        {
+            return _context.Transactions
+                .Include(t => t.Category)
+                .GroupBy(t => t.Category.Name)
+                .Select(g => new TransactionGraph(g.Key, g.Sum(t => t.Amount)))
+                .ToList();
         }
 
         public void UpdateTransaction(Transaction transaction)

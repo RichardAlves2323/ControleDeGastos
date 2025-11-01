@@ -10,6 +10,8 @@ namespace ControleDeGasto.Domain.Interfaces.Services
         Transaction GetTransactionByIdWithCategory(int id);
         IEnumerable<Transaction> GetAllTransactions();
         IEnumerable<Transaction> GetAllTransactionsWithCategory();
+        IEnumerable<TransactionGraph> GetTransactionGraphs();
+        IEnumerable<TransactionGraph> GetTotalTransactionType();
         void UpdateTransaction(Transaction transaction);
         void DeleteTransaction(int id);
     }
