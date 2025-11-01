@@ -3,7 +3,7 @@
 
 namespace ControleDeGasto.Domain.Interfaces.Repositories
 {
-    internal interface TransactionRepository
+    public interface TransactionRepository
     {
         Transaction AddTransaction(Transaction transaction);
         Transaction GetTransactionById(int id);

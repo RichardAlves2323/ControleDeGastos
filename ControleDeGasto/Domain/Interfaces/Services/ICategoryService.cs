@@ -2,7 +2,7 @@
 
 namespace ControleDeGasto.Domain.Interfaces.Services
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Category AddCategory(Category category);
         Category GetCategoryById(int id);

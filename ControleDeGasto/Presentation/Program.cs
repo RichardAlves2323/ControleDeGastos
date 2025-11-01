@@ -1,4 +1,5 @@
 using ControleDeGasto.Infrastructure.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ControleDeGasto.Presentation
 {
@@ -16,7 +17,11 @@ namespace ControleDeGasto.Presentation
             db.Database.EnsureCreated();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form_Home());
+
+            var serviceProvider = ServiceProviderBuilder.Build();
+            var formHome = serviceProvider.GetRequiredService<Form_Home>();
+
+            Application.Run(formHome);
         }
     }
 }
