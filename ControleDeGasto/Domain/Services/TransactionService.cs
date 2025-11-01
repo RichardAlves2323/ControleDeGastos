@@ -28,9 +28,19 @@ namespace ControleDeGasto.Domain.Services
             return _transactionRepository.GetAllTransactions();
         }
 
+        public IEnumerable<Transaction> GetAllTransactionsWithCategory()
+        {
+            return _transactionRepository.GetAllTransactionsWithCategory();
+        }
+
         public Transaction GetTransactionById(int id)
         {
             return _transactionRepository.GetTransactionById(id);
+        }
+
+        public Transaction GetTransactionByIdWithCategory(int id)
+        {
+            return _transactionRepository.GetTransactionByIdWithCategory(id);
         }
 
         public void UpdateTransaction(Transaction transaction)

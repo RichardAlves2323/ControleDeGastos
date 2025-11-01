@@ -70,7 +70,7 @@ namespace ControleDeGasto
 
         private void TransactionInTable()
         {
-            var transactions = _transactionService.GetAllTransactions();
+            var transactions = _transactionService.GetAllTransactionsWithCategory();
 
             foreach (var transaction in transactions)
             {
@@ -83,7 +83,7 @@ namespace ControleDeGasto
             DataRow newLine = _transactionTable.NewRow();
 
             newLine["Id"] = transaction.Id;
-            newLine["Categoria"] = transaction.CategoryId.ToString();
+            newLine["Categoria"] = transaction.Category.Name;
             newLine["Valor"] = transaction.Amount;
             newLine["Data"] = transaction.Date.ToString();
 
@@ -110,7 +110,8 @@ namespace ControleDeGasto
             Transaction transactionSaved = _transactionService.AddTransaction(newTransaction);
             if (transactionSaved != null)
             {
-                AddTransactionInTable(transactionSaved);
+                Transaction transactionWithCategory = _transactionService.GetTransactionByIdWithCategory(transactionSaved.Id);
+                AddTransactionInTable(transactionWithCategory);
             }
             Txt_TransactionAmount.Clear();
 
